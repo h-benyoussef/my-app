@@ -1,0 +1,18 @@
+pipeline {
+    agent any
+    environment {
+        PATH="/opt/maven/bin:$PATH"
+    }
+    stages{
+     stage("Git Check Out"){
+         steps{
+            git credentialsId: 'github', url: 'https://github.com/h-benyoussef/my-app'
+             }
+       }  
+       stage("Maven Build"){
+           steps{
+               sh "mvn clean package"
+           }
+       }
+    }
+}
